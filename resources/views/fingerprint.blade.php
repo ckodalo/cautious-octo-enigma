@@ -25,6 +25,7 @@
                 window.location.replace("/dashboard");
             }
 
+
                 const { success } = await Webpass.attest("/webauthn/register/options", "/webauthn/register");
                 if (success) {
                     window.location.replace("/dashboard");

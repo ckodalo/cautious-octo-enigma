@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laragear\WebAuthn\Contracts\WebAuthnAuthenticatable;
 use Laragear\WebAuthn\WebAuthnAuthentication;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements WebAuthnAuthenticatable
 {
@@ -45,4 +46,9 @@ class User extends Authenticatable implements WebAuthnAuthenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function chirps(): HasMany
+    {
+        return $this->hasMany(Chirp::class);
+    }
 }

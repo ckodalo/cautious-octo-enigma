@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChirpController;
 
 
 
@@ -35,6 +36,8 @@ Route::get('/complete', function () {
     return view('complete');
 })->middleware(['auth', 'verified'])->name('register.complete');
 
+
+
 Route::get('/fingerprint', function () {
     return view('fingerprint');
 })->middleware(['auth', 'verified'])->name('fingerprint.page');
@@ -59,6 +62,9 @@ Route::middleware('web')
                         Route::post('webauthn/login', 'login')->name('webauthn.login');
                     });
            });
+
+Route::resource('chirps', ChirpController::class)
+->only(['index', 'store'])->middleware(['auth', 'verified']);        
 
   
 
