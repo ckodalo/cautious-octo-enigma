@@ -1,8 +1,13 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebAuthn\WebAuthnRegisterController;
+use App\Http\Controllers\WebAuthn\WebAuthnLoginController;
+use App\Http\Controllers\WebAuthn\AttestationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChirpController;
+use Illuminate\Routing\Router; 
+
 
 
 
@@ -19,10 +24,6 @@ use App\Http\Controllers\ChirpController;
 */
 
 
-//Route::view('welcome');
-
-// WebAuthn Routes
-//WebAuthnRoutes::register();
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,20 +49,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('web')
-            ->group(static function (): void {
-                Route::controller(\App\Http\Controllers\WebAuthn\WebAuthnRegisterController::class)
-                    ->group(static function (): void {
-                        Route::post('webauthn/register/options', 'options')->name('webauthn.register.options');
-                        Route::post('webauthn/register', 'register')->name('webauthn.register');
-                    });
+Route::middleware('web')->group(function () {
+    Route::post('/webauthn/register/options', [WebAuthnRegisterController::class, 'options'])->name('webauthn.register.options');
+    Route::post('/webauthn/register', [AttestationController::class, 'register'])->name('webauthn.register');
+});
 
-                Route::controller(\App\Http\Controllers\WebAuthn\WebAuthnLoginController::class)
-                    ->group(static function (): void {
-                        Route::post('webauthn/login/options', 'options')->name('webauthn.login.options');
-                        Route::post('webauthn/login', 'login')->name('webauthn.login');
-                    });
-           });
+Route::middleware('web')->group(function () {
+    Route::post('/webauthn/login/options', [WebAuthnLoginController::class, 'options'])->name('webauthn.login.options');
+    Route::post('/webauthn/login', [WebAuthnLoginController::class, 'login'])->name('webauthn.login');
+});
+
+
+
 
 Route::resource('chirps', ChirpController::class)
 ->only(['index', 'store'])->middleware(['auth', 'verified']);        
