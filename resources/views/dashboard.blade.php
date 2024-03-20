@@ -10,35 +10,11 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
-                  
+                    
+                    
                 </div>
             </div>
         </div>
     </div>   
-    <!-- <script  type="module" >
-        import Webpass from "https://cdn.jsdelivr.net/npm/@laragear/webpass@1/dist/webpass.mjs"
-    try {
-        console.log("Webpass:", Webpass);
-        console.log("Type of Webpass:", typeof Webpass);
-
-        (async () => {
-            if (Webpass.isUnsupported()) {
-                alert("Your browser doesn't support WebAuthn.");
-                return;
-            }
-            
-            const { success } = await Webpass.attest("/webauthn/register/options", "/webauthn/register");
-            
-        console.log("Success:", success);
-
-
-            if (success) {
-                window.location.replace("/dashboard");
-            }
-        })();
-    } catch (error) {
-        console.error("Error:", error);
-    }
-</script> -->
-
 </x-app-layout>
+

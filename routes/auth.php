@@ -16,11 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     
-//     Route::post('webauthn/register/options', [WebAuthnRegisterController::class, 'options'])->name('webauthn.register.options');
-// Route::post('webauthn/register', [WebAuthnRegisterController::class, 'register'])->name('webauthn.register');
-
-// Route::post('webauthn/login/options', [WebAuthnLoginController::class, 'options'])->name('webauthn.login.options');
-// Route::post('webauthn/login', [WebAuthnLoginController::class, 'login'])->name('webauthn.login');
     
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
@@ -49,20 +44,6 @@ Route::middleware('guest')->group(function () {
                 ->name('password.store');
 });
    
-// Route::middleware('web')
-//             ->group(static function (): void {
-//                 Route::controller(\App\Http\Controllers\WebAuthn\WebAuthnRegisterController::class)
-//                     ->group(static function (): void {
-//                         Route::post('webauthn/register/options', 'options')->name('webauthn.register.options');
-//                         Route::post('webauthn/register', 'register')->name('webauthn.register');
-//                     });
-
-//                 Route::controller(\App\Http\Controllers\WebAuthn\WebAuthnLoginController::class)
-//                     ->group(static function (): void {
-//                         Route::post('webauthn/login/options', 'options')->name('webauthn.login.options');
-//                         Route::post('webauthn/login', 'login')->name('webauthn.login');
-//                     });
-//             });
 
     
 
